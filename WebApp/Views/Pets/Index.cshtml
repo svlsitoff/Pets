@@ -1,0 +1,70 @@
+﻿@model IEnumerable<WebApp.Models.Pet>
+
+@{
+    ViewData["Title"] = "Shelter";
+}
+
+<h1>Shelter</h1>
+
+<p>
+    <a asp-action="Create"> New Day</a>
+</p>
+<h3>Places left : @ViewBag.Places</h3>
+<h3>Money : @ViewBag.Money</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Kind)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PetPicture)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Age)
+            </th>
+            <th>
+
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Kind)
+            </td>
+            
+            <td>
+                <img src="~/images/@item.PetPicture"
+                     class="rounded-circle"
+                     height="70" width="100"
+                     asp-append-version="true" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td>
+                @if (item.Health == 2)
+                {
+                    <label>The pet is healthy</label><span>|</span>
+                    <a asp-action="Details" asp-route-id="@item.ID">Pet examination</a><span>|</span>
+                    <a asp-action="Delete" asp-route-id="@item.ID">Put your pet in good hands</a>
+                }
+                @if (item.Health < 2)
+                {
+                    <a asp-action="Edit" asp-route-id="@item.ID">Pet treatment</a><span>|</span>
+                    <a asp-action="Details" asp-route-id="@item.ID">Pet examination</a><span>|</span>
+                    <span>Cannot be given - the pet is sick</span>
+                }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

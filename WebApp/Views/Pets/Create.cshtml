@@ -1,0 +1,102 @@
+﻿@model WebApp.Models.PetViewModel
+
+@{
+    ViewData["Title"] = "New Pet";
+}
+
+<div class="col-md-10 mx-auto py-4">
+    <div class="card">
+        <div class="card-header bg-primary text-uppercase text-white">
+            <h4>Found animal </h4>
+        </div>
+        <div class="card-body">
+            <form enctype="multipart/form-data" asp-action="Create">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Name" class="control-label"></label>
+                            <input readonly asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Kind" class="control-label"></label>
+                            <input readonly asp-for="Kind" class="form-control" />
+                            <span asp-validation-for="Kind" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Age" class="control-label"></label>
+                            <input readonly asp-for="Age" class="form-control" />
+                            <span asp-validation-for="Age" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="number" hidden asp-for="Health" class="form-control" />
+                            <span asp-validation-for="Health" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <label asp-for="HealthStatus" class="control-label"></label>
+                            <input type="text" readonly asp-for="HealthStatus" class="form-control" />
+                            <span asp-validation-for="HealthStatus" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="hidden" asp-for="PetPicture" class="form-control">
+
+                            @if (Model.Kind == "Cat")
+                            {
+                                <img src="~/images/@Model.PetPicture"
+                                     class="rounded-circle"
+                                     height="70" width="100"
+                                     asp-append-version="true" />
+                            }
+                            @if (Model.Kind == "Dog")
+                            {
+                                <img src="~/images/@Model.PetPicture"
+                                     class="rounded-circle"
+                                     height="70" width="100"
+                                     asp-append-version="true" />
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Will we accept a pet at our shelter?" class="btn btn-sm btn-primary rounded-0 text-uppercase" />
+                    <a asp-action="Index" class="btn btn-sm btn-primary rounded-0 text-uppercase"><i class="fas fa-fast-backward"></i>Not today. Back to List</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+
+        // Add the following code if you want the name of the file appear on select
+        $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
+ }
+    

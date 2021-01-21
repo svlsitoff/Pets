@@ -1,0 +1,77 @@
+﻿@model WebApp.Models.Pet
+
+@{
+    ViewData["Title"] = "Pet treatment";
+}
+
+<h1>Edit</h1>
+
+<h4>Pet</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ID" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input readonly asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Kind" class="control-label"></label>
+                <input readonly asp-for="Kind" class="form-control" />
+                <span asp-validation-for="Kind" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Age" class="control-label"></label>
+                <input readonly asp-for="Age" class="form-control" />
+                <span asp-validation-for="Age" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+               
+                <input hidden readonly asp-for="Health" class="form-control" />
+                <span asp-validation-for="Health" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PetPicture" class="control-label"></label>
+                <input hidden readonly asp-for="PetPicture" class="form-control" />
+                <img src="~/images/@Model.PetPicture"
+                     class="rounded-circle"
+                     height="70" width="100"
+                     asp-append-version="true" />
+                <span asp-validation-for="PetPicture" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="HealthStatus" class="control-label"></label>
+                <input asp-for="HealthStatus" class="form-control" />
+                <span asp-validation-for="HealthStatus" class="text-danger"></span>
+            </div>
+            @if (Model.Health == 0)
+            {
+                <div class="form-group">
+                    <label asp-for="Health" class="control-label">The amount of treatment costs is 243</label>
+
+                </div>
+            }
+            @if (Model.Health == 1)
+            {
+                <div class="form-group">
+                    <label asp-for="Health" class="control-label">The amount of treatment costs is 146</label>
+                </div>
+            }
+            <div class="form-group">
+                <input type="submit" value="To heal!" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

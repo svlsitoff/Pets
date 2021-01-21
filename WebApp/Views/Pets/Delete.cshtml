@@ -1,0 +1,64 @@
+﻿@model WebApp.Models.Pet
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>To give pet?</h1>
+
+<h3>You can give your pet to good hands. If you agree, the new owners will donate @ViewBag.Donate to the shelter.</h3>
+<div>
+    <h4>Pet</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Kind)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Kind)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PetPicture)
+        </dt>
+        <dd class="col-sm-10">
+            @if (Model.Kind == "Cat")
+            {
+                <img src="~/images/@Model.PetPicture"
+                     class="rounded-circle"
+                     height="70" width="100"
+                     asp-append-version="true" />
+            }
+            @if (Model.Kind == "Dog")
+            {
+                <img src="~/images/@Model.PetPicture"
+                     class="rounded-circle"
+                     height="70" width="100"
+                     asp-append-version="true" />
+            }
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Age)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Age)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.HealthStatus)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.HealthStatus)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="ID" />
+        <input type="submit" value="To give!" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>
